@@ -4,15 +4,48 @@
 
 </head>
 <body>
-<canvas id = "canvas" width="1000" height="500" style="border:3px solid #000000;">
+<canvas id = "canvas" width="1000" height="500" style=" border:3px solid #000000;">
 </canvas>
 <script>
   const canvas = document.getElementById('canvas');
   const ctx = canvas.getContext('2d');
   ctx.fillStyle = 'green';
-  ctx.fillRect(30, 15, 20, 20);
-  ctx.fillRect(55, 15, 20, 20);
-  ctx.fillRect(80, 15, 20, 20);
+  ctx.fillRect(50, 200, 20, 20);
+  ctx.fillRect(75, 200, 20, 20);
+  ctx.fillRect(100, 200, 20, 20);
+  ctx.fillRect(100, 225, 20, 20);
+  ctx.fillRect(100, 250, 20, 20);
+  ctx.fillRect(125, 250, 20, 20);
+  ctx.fillRect(150, 250, 20, 20);
+  ctx.fillRect(0, 0, 20, 20);
+  ctx.fillRect(0, 25, 20, 20);
+  ctx.fillRect(25, 0, 20, 20);
+  ctx.fillRect(980, 480, 20, 20);
+  ctx.fillRect(955, 480, 20, 20);
+  ctx.fillRect(980, 455, 20, 20);
+
+  window.addEventListener('keydown', function(event) {
+    const key = event.keyCode;
+    switch(key) 
+  {
+  	case 37:
+  	console.log("Left")
+  	break;
+  	case 38:
+  	console.log("Up")
+  	break;
+  	case 39:
+  	console.log("Right")
+  	break;
+  	case 40:
+  	console.log("Down")
+  	break;
+ }
+ console.log(key)
+});
+
+ 
+
 
   </script>
 </body>
