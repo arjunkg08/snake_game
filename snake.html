@@ -9,44 +9,91 @@
 <script>
   const canvas = document.getElementById('canvas');
   const ctx = canvas.getContext('2d');
-  ctx.fillStyle = 'green';
-  ctx.fillRect(50, 200, 20, 20);
-  ctx.fillRect(75, 200, 20, 20);
-  ctx.fillRect(100, 200, 20, 20);
-  ctx.fillRect(100, 225, 20, 20);
-  ctx.fillRect(100, 250, 20, 20);
-  ctx.fillRect(125, 250, 20, 20);
-  ctx.fillRect(150, 250, 20, 20);
-  ctx.fillRect(0, 0, 20, 20);
-  ctx.fillRect(0, 25, 20, 20);
-  ctx.fillRect(25, 0, 20, 20);
-  ctx.fillRect(980, 480, 20, 20);
-  ctx.fillRect(955, 480, 20, 20);
-  ctx.fillRect(980, 455, 20, 20);
+  //ctx.fillStyle = 'green';
+  //ctx.fillRect(50, 200, 20, 20);
+  //ctx.fillRect(75, 200, 20, 20);
+  //ctx.fillRect(100, 200, 20, 20);
+  //ctx.fillRect(100, 225, 20, 20);
+  //ctx.fillRect(100, 250, 20, 20);
+  //ctx.fillRect(125, 250, 20, 20);
+  //ctx.fillRect(150, 250, 20, 20);
+  //ctx.fillRect(0, 0, 20, 20);
+  //ctx.fillRect(0, 25, 20, 20);
+  //ctx.fillRect(25, 0, 20, 20);
+  //ctx.fillRect(980, 480, 20, 20);
+  //ctx.fillRect(955, 480, 20, 20);
+  //ctx.fillRect(980, 455, 20, 20);
+
+  var snake = [];
+  var dir;
+  
+    snake[0] = {
+      x : 100,
+      y : 250
+
+
+    };
+    //var food = {
+      //x : Math.floor(Math.random()*17+3) * 20,
+      //y : Math.floor(Math.random()*15+8) * 20
+   //}
+  
 
   window.addEventListener('keydown', function(event) {
-    const key = event.keyCode;
-    switch(key) 
-  {
-  	case 37:
-  	console.log("Left")
-  	break;
-  	case 38:
-  	console.log("Up")
-  	break;
-  	case 39:
-  	console.log("Right")
-  	break;
-  	case 40:
-  	console.log("Down")
-  	break;
- }
- console.log(key)
+  const key = event.keyCode;
+  var game = window.setInterval(drawSnake,600);
+  var moveInterval = clearInterval(moveInterval);
+  
+  if (key == 37 ){
+      var game = drawSnake()
+      clearInterval(moveInterval);
+      dir = "LEFT";
+      console.log("Left")
+  }
+
+  else if (key == 38){
+    var game = drawSnake()
+    clearInterval(moveInterval);
+    dir = "UP";
+    console.log("UP")
+
+  }
+      
+  else if (key == 39){
+    var game = drawSnake()
+    clearInterval(moveInterval);
+    dir = "RIGHT";
+    console.log("Right")
+
+  }
+     
+  else if (key == 40){
+    var game = drawSnake()
+    clearInterval(moveInterval);
+    dir = "DOWN";
+    console.log("Down")
+
+  }
+  console.log(key) 
 });
+   
+  function drawSnake()
+  {   
+      ctx.clearRect(snake[0].x,snake[0].y,20,20);
+      if (dir == "LEFT") snake[0].x -= 20;
+      if (dir == "UP") snake[0].y -= 20;
+      if (dir == "RIGHT") snake[0].x += 20;
+      if (dir == "DOWN") snake[0].y += 20;
+      ctx.fillStyle = 'green';
+      ctx.fillRect(snake[0].x,snake[0].y,20,20);
 
- 
 
+      
+     } 
+    //ctx.fillStyle = 'red';
+    //ctx.fillRect(food.x,food.y,20,20);
+    console.log(drawSnake) 
 
-  </script>
+</script>
 </body>
 </html>
