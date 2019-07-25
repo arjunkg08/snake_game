@@ -4,7 +4,7 @@
 
 </head>
 <body>
-<canvas id = "canvas" width="1000" height="500" style=" border:3px solid #000000;">
+<canvas id = "canvas" width="1000" height="500" style=" border:4px solid #000000;">
 </canvas>
 <script>
   const canvas = document.getElementById('canvas');
@@ -26,73 +26,75 @@
 
   var snake = [];
   var dir;
-  
-    snake[0] = {
-      x : 100,
-      y : 250
-
-
-    };
-    //var food = {
-      //x : Math.floor(Math.random()*17+3) * 20,
-      //y : Math.floor(Math.random()*15+8) * 20
-   //}
-  
+  var game;
+  snake[0] = { x : 100, y : 250 };
+  snake[1] = { x : 125, y : 250 };
+  snake[2] = { x : 150, y : 250 };
 
   window.addEventListener('keydown', function(event) {
   const key = event.keyCode;
-  var game = window.setInterval(drawSnake,600);
-  var moveInterval = clearInterval(moveInterval);
-  
-  if (key == 37 ){
-      var game = drawSnake()
-      clearInterval(moveInterval);
-      dir = "LEFT";
-      console.log("Left")
+  clearInterval(game);
+
+  if (key == 37){
+    game = setInterval(drawSnake,100);
+    dir = "LEFT";
+    console.log("Left")
   }
 
   else if (key == 38){
-    var game = drawSnake()
-    clearInterval(moveInterval);
+    game = setInterval(drawSnake,100);
     dir = "UP";
     console.log("UP")
 
   }
       
   else if (key == 39){
-    var game = drawSnake()
-    clearInterval(moveInterval);
+    game = setInterval(drawSnake,100);
     dir = "RIGHT";
     console.log("Right")
 
   }
      
   else if (key == 40){
-    var game = drawSnake()
-    clearInterval(moveInterval);
+    game = setInterval(drawSnake,100);
     dir = "DOWN";
     console.log("Down")
 
   }
-  console.log(key) 
+  console.log(key)
+
 });
    
+
   function drawSnake()
-  {   
-      ctx.clearRect(snake[0].x,snake[0].y,20,20);
-      if (dir == "LEFT") snake[0].x -= 20;
-      if (dir == "UP") snake[0].y -= 20;
-      if (dir == "RIGHT") snake[0].x += 20;
-      if (dir == "DOWN") snake[0].y += 20;
-      ctx.fillStyle = 'green';
-      ctx.fillRect(snake[0].x,snake[0].y,20,20);
+  {
+      for (var i = 0; i < snake.length; i++)
+      { 
+       ctx.fillStyle = 'green';
+       ctx.fillRect(snake[i].x,snake[i].y,20,20);
+
+      }
+      var snakeX = snake[0].x;
+      var snakeY = snake[0].y;
+       if (dir == "LEFT") snakeX -= 23;
+       if (dir == "UP") snakeY -= 23;
+       if (dir == "RIGHT") snakeX += 23;
+       if (dir == "DOWN") snakeY += 23;
+       ctx.clearRect(snake[snake.length -1].x, snake[snake.length -1].y,20,20);
+       ctx.fillRect(snakeX,snakeY,20,20);
 
 
+      var newHead = {
+        x: snakeX,
+        y: snakeY
+      }
+      snake.unshift(newHead);
+      snake.pop();
       
-     } 
-    //ctx.fillStyle = 'red';
-    //ctx.fillRect(food.x,food.y,20,20);
-    console.log(drawSnake) 
+      
+
+  }
+  console.log(drawSnake)
 
 </script>
 </body>
