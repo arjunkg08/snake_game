@@ -31,31 +31,39 @@
   snake[1] = { x : 125, y : 250 };
   snake[2] = { x : 150, y : 250 };
 
+  
+  var food = {
+      x : Math.floor(Math.random()*25+1) * 20,
+      y : Math.floor(Math.random()*20+3) * 20
+  };
+
+    
+
   window.addEventListener('keydown', function(event) {
   const key = event.keyCode;
   clearInterval(game);
 
-  if (key == 37){
+  if (key == 37 && dir != "RIGHT"){
     game = setInterval(drawSnake,100);
     dir = "LEFT";
     console.log("Left")
   }
 
-  else if (key == 38){
+  else if (key == 38 && dir != "DOWN"){
     game = setInterval(drawSnake,100);
     dir = "UP";
     console.log("UP")
 
   }
       
-  else if (key == 39){
+  else if (key == 39 && dir != "LEFT"){
     game = setInterval(drawSnake,100);
     dir = "RIGHT";
     console.log("Right")
 
   }
      
-  else if (key == 40){
+  else if (key == 40 && dir != "UP"){
     game = setInterval(drawSnake,100);
     dir = "DOWN";
     console.log("Down")
@@ -67,22 +75,14 @@
    
 
   function drawSnake()
-  {
-      for (var i = 0; i < snake.length; i++)
-      { 
-       ctx.fillStyle = 'green';
-       ctx.fillRect(snake[i].x,snake[i].y,20,20);
-
-      }
-      var snakeX = snake[0].x;
-      var snakeY = snake[0].y;
-       if (dir == "LEFT") snakeX -= 23;
-       if (dir == "UP") snakeY -= 23;
-       if (dir == "RIGHT") snakeX += 23;
-       if (dir == "DOWN") snakeY += 23;
-       ctx.clearRect(snake[snake.length -1].x, snake[snake.length -1].y,20,20);
-       ctx.fillRect(snakeX,snakeY,20,20);
-
+  {   
+    ctx.clearRect(snake[snake.length -1].x, snake[snake.length -1].y,20,20);
+    var snakeX = snake[0].x;
+    var snakeY = snake[0].y;
+    if (dir == "LEFT") snakeX -= 23;
+    if (dir == "UP") snakeY -= 23;
+    if (dir == "RIGHT") snakeX += 23;
+    if (dir == "DOWN") snakeY += 23;
 
       var newHead = {
         x: snakeX,
@@ -90,11 +90,17 @@
       }
       snake.unshift(newHead);
       snake.pop();
-      
-      
+      for (var i = 0; i < snake.length; i++)
+      { 
+       ctx.fillStyle = (i ==0)?'black':'green';
+       ctx.fillRect(snake[i].x,snake[i].y,20,20);
 
+      }
+      
   }
   console.log(drawSnake)
+
+  
 
 </script>
 </body>
