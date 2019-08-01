@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title></title>
 
 </head>
 <body>
-<canvas id = "canvas" width="988" height="500" style =" border:4px solid #000000;">
+<canvas id = "canvas" width="987" height="500" style =" padding: 1px;border:4px solid #000000;">
 </canvas>
 <script>
   const canvas = document.getElementById('canvas');
@@ -28,6 +29,8 @@
   var game;
   var foodX;
   var foodY;
+  var snakeX;
+  var snakeY;
   snake[0] = { x : 0, y : 253 };
   snake[1] = { x : 23, y : 253 };
   snake[2] = { x : 46, y : 253 };
@@ -36,10 +39,8 @@
 
   function foodGeneration()
   {
-   foodX = Math.floor(Math.random()*23+1);
-   foodX = foodX *23;  
-   foodY = Math.floor(Math.random()*15+3);
-   foodY = foodY *23;
+   foodX = Math.floor(Math.random()*23+1) *23;  
+   foodY = Math.floor(Math.random()*15+3) *23;
    ctx.fillStyle = "red";
    ctx.fillRect(foodX,foodY,20,20);
   }
@@ -82,8 +83,8 @@
   function drawSnake()
   {   
     ctx.clearRect(snake[snake.length -1].x, snake[snake.length -1].y,20,20);
-    var snakeX = snake[0].x;
-    var snakeY = snake[0].y;
+    snakeX = snake[0].x;
+    snakeY = snake[0].y;
     if (dir == "LEFT") snakeX -= 23;
     if (dir == "UP") snakeY -= 23;
     if (dir == "RIGHT") snakeX += 23;
@@ -100,9 +101,10 @@
       if (snakeX == foodX && snakeY == foodY)
       {
         snake.push(newHead);
-        foodGeneration(); 
-      }
+        foodGeneration();
 
+      }
+      snakeCollision();
       for (var i = 0; i < snake.length; i++)
       { 
        ctx.fillStyle = (i ==0)?'black':'green';
@@ -110,6 +112,40 @@
 
       }
     
+  }
+  
+  function snakeCollision()
+  { 
+    
+    if (dir == "RIGHT" && snakeX == 989) 
+    {
+      alert('collision detected..');
+      window.location.reload();
+    }
+    
+    else if(dir == "LEFT" && snakeX == -23)
+    {
+      alert('collision detected..');
+      window.location.reload();
+    }
+    
+    else if (dir == "UP" && snakeY == -23) 
+    {
+      alert('collision detected..');
+      window.location.reload();
+    }
+    
+    else if(dir == "DOWN" && snakeY == 506)
+    {
+      alert('collision detected..');
+      window.location.reload();
+    }
+
+    // if (snakeX == snake[i]. && snakeY == snake[i].y)
+    // {
+    //   alert('collision detected..');
+    //   window.location.reload();
+    // }
   }
 
 
