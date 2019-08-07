@@ -2,9 +2,10 @@
 <html>
 <head>
 <h1 align = "center">Snake Game</h1>
+<center style = "margin-right: 15%;padding: 0px;"><h3 align = "right" id = "myscore">Score : 0</h3></center>
 </head>
 <body>
-<center style= "margin-top: 3.5%;"><canvas id = "canvas" width="987" height="504" style =" padding: 1px;border:4px solid #000000;">
+<center><canvas id = "canvas" width="987" height="480" style =" padding: 1px;border:4px solid #000000;">
 </canvas></center>
 <script>
   const canvas = document.getElementById('canvas');
@@ -16,6 +17,8 @@
   var foodY;
   var snakeX;
   var snakeY;
+  var score = 0;
+
 
   snake[0] = { x : 0, y : 253 };
   snake[1] = { x : 23, y : 253 };
@@ -23,10 +26,11 @@
   
   foodGeneration();
 
+
   function foodGeneration()
   {
    foodX = Math.floor(Math.random()*25+1) *23;  
-   foodY = Math.floor(Math.random()*20+1) *23;
+   foodY = Math.floor(Math.random()*21+1) *23;
    ctx.fillStyle = "red";
    ctx.fillRect(foodX,foodY,20,20);
   }
@@ -87,6 +91,8 @@
       if (snakeX == foodX && snakeY == foodY)
       {
         snake.push(newHead);
+        score += 5;
+        document.getElementById("myscore").innerHTML = "Score : " + score;  
         foodGeneration();
 
         for (i = 0;i<snake.length;i++)
@@ -130,7 +136,7 @@
       window.location.reload();
     }
     
-    else if(dir == "DOWN" && snakeY == 506)
+    else if(dir == "DOWN" && snakeY == 483)
     {
       alert('Boundary Collision..Game Over!!');
       window.location.reload();
